@@ -1,0 +1,135 @@
+﻿@model _1291163_MVC_Project.Models.guests
+
+<div class="row">
+    <div class="col-12">
+        @using (Ajax.BeginForm("Create", "Guests",
+            new AjaxOptions
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "msg",
+                OnComplete = "clearAll"
+            },
+            new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken();
+
+            <div class="row">
+                <!-- LEFT: Guest Info -->
+                <div class="col-12 col-lg-6">
+                    <h2 class="display-6">Add New Guest</h2>
+
+                    <div class="row mb-2">
+                        @Html.LabelFor(x => x.guestsName, htmlAttributes: new { @class = "col-form-label col-form-label-sm col-4" })
+                        <div class="col-6">
+                            @Html.TextBoxFor(x => x.guestsName, new { @class = "form-control form-control-sm", placeholder = "Guest Name" })
+                        </div>
+                        <div class="col-2">
+                            @Html.ValidationMessageFor(x => x.guestsName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        @Html.LabelFor(x => x.bookingDate, htmlAttributes: new { @class = "col-form-label col-form-label-sm col-4" })
+                        <div class="col-6">
+                            @*@Html.TextBoxFor(x => x.bookingDate, new { @class = "form-control form-control-sm", type = "date" })*@
+                             @Html.TextBoxFor(x => x.bookingDate,
+                        new
+                        {
+                            @class = "form-control form-control-sm",
+                            type = "date",
+                            min = DateTime.Now.ToString("yyyy-MM-dd")
+                        })
+
+                        </div>
+                        <div class="col-2">
+                            @Html.ValidationMessageFor(x => x.bookingDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        @Html.LabelFor(x => x.numberOfGueist, htmlAttributes: new { @class = "col-form-label col-form-label-sm col-4" })
+                        <div class="col-6">
+                            @Html.TextBoxFor(x => x.numberOfGueist, new { @class = "form-control form-control-sm", type = "number", min = "1", placeholder = "Number of Guests" })
+                        </div>
+                        <div class="col-2">
+                            @Html.ValidationMessageFor(x => x.numberOfGueist, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <!-- Picture File (if you have a HttpPostedFileBase property like pictureFile) -->
+                    <div class="row mb-2">
+                        @Html.Label("Picture", htmlAttributes: new { @class = "col-form-label col-form-label-sm col-4" })
+                        <div class="col-6">
+                            <input type="file" name="pictureFile" class="form-control form-control-sm" />
+                        </div>
+                        <div class="col-2">
+                            @* validation if you have pictureFile in ViewModel *@
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        @Html.LabelFor(x => x.coupleStatus, htmlAttributes: new { @class = "col-form-label col-form-label-sm col-4" })
+                        <div class="col-6 form-check pt-1">
+                            @Html.CheckBoxFor(x => x.coupleStatus, new { @class = "form-check-input" })
+                            <label class="form-check-label ms-1">Couple</label>
+                        </div>
+                        <div class="col-2">
+                            @Html.ValidationMessageFor(x => x.coupleStatus, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Room List -->
+                <div class="col-12 col-lg-6">
+                    <h2 class="display-6">Room List</h2>
+
+                    <div class="d-flex justify-content-end mb-2">
+                        <a href="#" id="btnPlus" class="btn btn-primary btn-sm">
+                            <i class="fa fa-plus"></i> Add Room
+                        </a>
+                    </div>
+
+                    <div id="roomContainer">
+                        @Html.Action("AddNewRoomRow", "Guests")
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <input type="submit" value="Save" class="btn btn-primary mb-2" />
+            </div>
+
+            <div class="row mb-2">
+                <div id="msg"></div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryunobtrusiveajax")
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+    <script>
+        // Add more room rows dynamically
+        $("#btnPlus").on("click", function (e) {
+            e.preventDefault();
+            $.get("@Url.Action("AddNewRoomRow","Guests")", function (html) {
+                $("#roomContainer").append(html);
+            });
+        });
+
+        // remove a row (button inside partial should call this)
+        function removeRow(btn) {
+            $(btn).closest(".room-row").remove();
+        }
+
+        // clear all form after submit (if you want)
+        function clearAll() {
+             //optional: reset inputs
+             $("form")[0].reset();
+        }
+    </script>
+}

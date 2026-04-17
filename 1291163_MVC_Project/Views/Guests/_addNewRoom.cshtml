@@ -1,0 +1,24 @@
+﻿@model _1291163_MVC_Project.Models.room
+@{
+    ViewBag.Title = "_addNewRoom";
+}
+
+
+
+<div class="row mb-3 room-row">
+    <div class="col-10">
+        @Html.DropDownListFor(x => x.roomId,
+            ViewBag.rooms as SelectList,
+            "---- Select Room ----",
+            new { @class = "form-select form-select-sm" })
+    </div>
+
+    <div class="col-2">
+        <a href="javascript:void(0)" onclick="removeRow(this)"
+           class="btn btn-outline-danger btn-sm">
+            <i class="fa fa-trash"></i>
+        </a>
+    </div>
+</div>
+
+

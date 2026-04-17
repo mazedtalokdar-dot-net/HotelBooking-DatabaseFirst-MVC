@@ -1,0 +1,135 @@
+﻿@model PagedList.IPagedList<_1291163_MVC_Project.Models.guests>
+@using PagedList.Mvc
+
+
+
+
+
+
+@{
+    ViewBag.Title = "Guest List";
+}
+
+<h2 class="display-5">Guest List</h2>
+
+<div class="d-flex justify-content-end">
+    <a href="@Url.Action("Create","Guests")" class="btn btn-outline-primary btn-sm mb-2">
+        <i class="fa fa-plus"></i> Add Guest
+    </a>
+</div>
+
+<div class="row g-3">
+    @foreach (var g in Model)
+    {
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm border-0 h-100">
+
+                <!-- Header -->
+                <div class="card-header text-white"
+                     style="background: linear-gradient(90deg,#1d2671,#c33764);">
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="@g.picture" width="40" height="40"
+                             class="rounded-circle bg-white" />
+                        <div>
+                            <div class="fw-bold">@g.guestsName</div>
+                            <small>@g.bookingDate.ToString("dd MMM yyyy")</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Body -->
+                <div class="card-body">
+                    <p class="mb-1">
+                        <strong>Guests:</strong> @g.numberOfGueist
+                    </p>
+                    <p class="mb-2">
+                        <strong>Status:</strong>
+                        <span class="badge @(g.coupleStatus ? "bg-success" : "bg-secondary")">
+                            @(g.coupleStatus ? "Couple" : "Regular")
+                        </span>
+                    </p>
+
+                    <div>
+                        <strong>Rooms:</strong><br />
+                        @foreach (var item in g.bookingEntries)
+                        {
+                            <span class="badge bg-dark me-1 mb-1">
+                                @item.room.roomName
+                            </span>
+                        }
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="card-footer bg-light d-flex justify-content-end gap-1">
+                    <a href="@Url.Action("Details","Guests",new{id=g.guestsId})"
+                       class="btn btn-outline-info btn-sm">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a href="@Url.Action("Edit","Guests",new{id=g.guestsId})"
+                       class="btn btn-outline-warning btn-sm">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="@Url.Action("Delete","Guests",new{id=g.guestsId})"
+                       class="btn btn-outline-danger btn-sm">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="d-flex justify-content-center mt-4">
+    @Html.PagedListPager(
+        Model,
+        page => Url.Action("Index", new { page }),
+        new PagedListRenderOptions
+        {
+            UlElementClasses = new[] { "pagination", "pagination-sm" },
+            LiElementClasses = new[] { "page-item" },
+
+
+        })
+</div>
+
+<style>
+    .pagination > li {
+        margin: 0 4px;
+    }
+
+        .pagination > li > a,
+        .pagination > li > span {
+            border-radius: 8px !important;
+            padding: 6px 12px;
+            border: 1px solid #0d6efd;
+            color: #0d6efd;
+            background-color: #fff;
+            text-decoration: none;
+            transition: all 0.2s ease-in-out;
+        }
+
+            .pagination > li > a:hover {
+                background-color: #0d6efd;
+                color: #fff;
+            }
+
+    .pagination > .active > a,
+    .pagination > .active > span,
+    .pagination > .active > a:hover,
+    .pagination > .active > span:hover {
+        background-color: #0d6efd !important;
+        border-color: #0d6efd !important;
+        color: #fff !important;
+    }
+
+    .pagination > .disabled > span,
+    .pagination > .disabled > a {
+        color: #6c757d !important;
+        border-color: #dee2e6 !important;
+        background-color: #f8f9fa !important;
+        cursor: not-allowed;
+    }
+</style>
+
+

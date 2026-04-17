@@ -1,0 +1,72 @@
+﻿@*@model IEnumerable<_1291163_MVC_Project.Models.room>
+
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.roomName)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.roomName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.roomId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.roomId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.roomId })
+            </td>
+        </tr>
+    }
+
+    </table>*@
+
+
+@model IEnumerable<_1291163_MVC_Project.Models.room>
+
+@{
+    ViewBag.Title = "Rooms";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">Rooms</h3>
+    @Html.ActionLink("➕ Create Room", "Create", null, new { @class = "btn btn-primary btn-sm" })
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.roomName)</th>
+                <th class="text-end" style="width: 230px;">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="fw-semibold">@Html.DisplayFor(m => item.roomName)</td>
+
+                    <td class="text-end">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.roomId }, new { @class = "btn btn-warning btn-sm me-1" })
+                        @Html.ActionLink("Details", "Details", new { id = item.roomId }, new { @class = "btn btn-info btn-sm me-1" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.roomId }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

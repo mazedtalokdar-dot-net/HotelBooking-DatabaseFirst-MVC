@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - RoomMate | Hotel Room Booking System</title>
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @RenderSection("style", required: false)
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @*<nav class="navbar navbar-expand-sm navbar-dark"
+        style="background: linear-gradient(90deg, #1d2671, #c33764);">*@
+    <nav class="navbar navbar-expand-lg navbar-dark"
+         style="background: linear-gradient(90deg, #1d2671, #c33764);">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                Room<sup style="font-size:11px;">Mate</sup>
+            </a>
+
+            @*<button class="navbar-toggler btn btn-outline-dark shadow-sm"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>*@
+            <button class="navbar-toggler btn btn-outline-light shadow-sm"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" ...>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        @Html.ActionLink("Home", "Index", "Home", null,
+                            new { @class = "nav-link active" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Guest", "Index", "Guests", null,
+                            new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Room", "Index", "rooms", null,
+                            new { @class = "nav-link" })
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <footer class="container-fluid text-center py-3"
+            style="background: linear-gradient(90deg, #1d2671, #c33764); color: #fff;">
+        <p class="mb-1">
+            &copy; @DateTime.Now.Year — <strong>Room<sup style="font-size:11px;">Mate</sup></strong>
+        </p>
+        <small class="footer-signature">Developed by Abdul Mazed | ASP.NET MVC Project</small>
+    </footer>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    @*<script>
+    // Add new room dropdown row
+    $("#btnPlus").click(function (e) {
+        e.preventDefault();
+
+        var roomContainer = $("#roomContainer");
+
+        $.ajax({
+            url: "/Guests/AddNewRoomRow",
+            type: "GET",
+            success: function (data) {
+                roomContainer.append(data);
+            },
+            error: function () {
+                alert("Unable to load room list.");
+            }
+        });
+    });
+
+    // Delete a room row
+    $(document).on("click", ".btnDeleteRoom", function (e) {
+        e.preventDefault();
+        $(this).closest(".room-row").remove();
+    });
+    </script>*@
+
+</body>
+</html>

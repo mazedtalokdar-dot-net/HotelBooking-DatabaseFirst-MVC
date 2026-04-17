@@ -1,0 +1,82 @@
+﻿@*@model _1291163_MVC_Project.Models.room
+
+    @{
+        ViewBag.Title = "Create";
+    }
+
+    <h2>Create</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>room</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.roomName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.roomName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.roomName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+
+
+
+@model _1291163_MVC_Project.Models.room
+
+@{
+    ViewBag.Title = "Create Room";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">Create Room</h3>
+    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-outline-secondary btn-sm" })
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger mb-3" })
+
+            <div class="mb-3">
+
+                @Html.TextBoxFor(m => m.roomName, new { @class = "form-control", placeholder = "e.g., 101 / A-12" })
+                @Html.ValidationMessageFor(m => m.roomName, "", new { @class = "text-danger small" })
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                    Save
+                </button>
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-outline-dark" })
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

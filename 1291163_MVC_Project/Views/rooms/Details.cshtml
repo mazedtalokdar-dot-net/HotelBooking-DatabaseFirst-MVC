@@ -1,0 +1,62 @@
+﻿@*@model _1291163_MVC_Project.Models.room
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>room</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.roomName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.roomName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.roomId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
+
+
+@model _1291163_MVC_Project.Models.room
+
+@{
+    ViewBag.Title = "Room Details";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">Room Details</h3>
+    @Html.ActionLink("Back", "Index", null,
+        new { @class = "btn btn-outline-secondary btn-sm" })
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+
+        <dl class="row mb-4">
+            <dt class="col-sm-3">Room Number</dt>
+            <dd class="col-sm-9 fw-semibold">
+                @Html.DisplayFor(m => m.roomName)
+            </dd>
+        </dl>
+
+        <div class="d-flex gap-2">
+            @Html.ActionLink("Edit", "Edit",
+                new { id = Model.roomId },
+                new { @class = "btn btn-warning" })
+
+            @Html.ActionLink("Delete", "Delete",
+                new { id = Model.roomId },
+                new { @class = "btn btn-danger" })
+        </div>
+
+    </div>
+</div>

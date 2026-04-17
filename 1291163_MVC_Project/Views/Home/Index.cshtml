@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<!-- HERO SECTION -->
+<div class="p-4 p-md-5 rounded-4 text-white mb-4"
+     style="background: linear-gradient(90deg, #1d2671, #c33764);">
+    <div class="row align-items-center g-4">
+
+        <div class="col-lg-7">
+            <h1 class="display-5 fw-bold mb-2">
+                Room<sup style="font-size:16px;">Mate</sup>
+            </h1>
+            <p class="lead mb-3">
+                A complete Hotel Room Booking & Management System built using
+                <strong>ASP.NET MVC</strong>.
+                Perform full CRUD operations on Rooms, Guests and Booking Entries.
+            </p>
+
+            <div class="d-flex flex-wrap gap-2 mb-3">
+                <a class="btn btn-light btn-lg" href="@Url.Action("Index","Rooms")">
+                    Manage Rooms
+                </a>
+                <a class="btn btn-outline-light btn-lg" href="@Url.Action("Index","Guests")">
+                    Manage Guests
+                </a>
+            </div>
+
+            <div>
+                <span class="badge bg-light text-dark me-2">MVC</span>
+                <span class="badge bg-light text-dark me-2">CRUD</span>
+                <span class="badge bg-light text-dark me-2">SQL Server</span>
+                <span class="badge bg-light text-dark me-2">EF</span>
+                <span class="badge bg-light text-dark">Bootstrap</span>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <img class="img-fluid"
+                     src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80"
+                     alt="Hotel Room" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CRUD MODULES -->
+<div class="row g-3">
+
+    <!-- ROOMS -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h5 class="fw-bold mb-2">🏨 Room Management</h5>
+                <p class="text-muted mb-3">
+                    Perform full CRUD operations on rooms.
+                    Define room numbers like <strong>Premium-101</strong>,
+                    <strong>Couple-405</strong>.
+                </p>
+                <a href="@Url.Action("Index","Rooms")"
+                   class="btn btn-sm btn-outline-primary">
+                    View Rooms
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- GUESTS -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h5 class="fw-bold mb-2">👤 Guest Management</h5>
+                <p class="text-muted mb-3">
+                    Add guest information, booking date,
+                    number of guests, couple status and photo.
+                </p>
+                <a href="@Url.Action("Index","Guests")"
+                   class="btn btn-sm btn-outline-success">
+                    View Guests
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOKINGS -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h5 class="fw-bold mb-2">🔗 Booking Entries</h5>
+                <p class="text-muted mb-3">
+                    Many-to-Many relationship implemented using
+                    <strong>BookingEntries</strong>
+                    (Guest ↔ Room).
+                </p>
+                <a href="@Url.Action("Create","Guests")"
+                   class="btn btn-sm btn-outline-dark">
+                    Create Booking
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- FINAL CTA -->
+<div class="card border-0 shadow-sm mt-4">
+    <div class="card-body d-flex flex-column flex-md-row
+                align-items-md-center justify-content-between gap-3">
+        <div>
+            <h5 class="fw-bold mb-1">Start Managing Hotel Data</h5>
+            <p class="text-muted mb-0">
+                Create rooms → Add guests → Assign rooms →
+                Manage bookings efficiently.
+            </p>
+        </div>
+        <div class="d-flex gap-2">
+            <a class="btn btn-primary" href="@Url.Action("Create","Rooms")">
+                Add Room
+            </a>
+            <a class="btn btn-outline-secondary" href="@Url.Action("Create","Guests")">
+                Add Guest
+            </a>
+        </div>
+    </div>
+</div>
+
